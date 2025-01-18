@@ -22,7 +22,7 @@ class UserEntity {
         $this->email = $email;
         $this->password = $password;
         $this->phone_number = $phone_number;
-        $this->role_id = "678b79603ffa9";
+        $this->role_id = "678bc776b5bcd";
 
         $this->current_date = new DateTime();
 

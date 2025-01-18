@@ -6,8 +6,8 @@ namespace Src\Application\Controllers;
 require_once __DIR__ . "/../../core/domains/usecases/CreatePlaceUseCase.php";
 require_once __DIR__ . "/../../infra/repositories/PlaceRepository.php";
 
-use CreatePlaceUseCase;
-use PlaceRepositoryImpl;
+use Src\Core\Domains\Usecases\CreatePlaceUseCase;
+use Src\Infra\Repositories\PlaceRepositoryImpl;
 
 class CreatePlaceController {
     public function execute() {

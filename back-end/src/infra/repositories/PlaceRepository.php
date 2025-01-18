@@ -1,8 +1,12 @@
 <?php
 
+namespace Src\Infra\Repositories;
+
 require_once __DIR__ . "/../database/db.php";
 require_once __DIR__ . "/../../core/repositories/PlaceRepository.php";
+require_once __DIR__ . "/../../core/domains/entities/PlaceEntity.php";
 
+use PDO;
 use Src\Core\Repositories\PlaceRepository;
 use Src\Core\Domains\Entities\PlaceEntity;
 use Src\Infra\Database\Database;
@@ -30,5 +34,15 @@ class PlaceRepositoryImpl implements PlaceRepository {
         $q->bindParam(":updated_at", $place->updated_at);
 
         return $q->execute();
+    }
+
+    public function getPlaces() {
+        $q = $this->database->query("SELECT * FROM places");
+
+        $q->execute();
+
+        $places = $q->fetchAll(PDO::FETCH_ASSOC);
+
+        return $places;
     }
 }

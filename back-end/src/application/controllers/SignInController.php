@@ -7,7 +7,7 @@ require_once __DIR__ . "/../../core/domains/usecases/SignInUseCase.php";
 require_once __DIR__ . "/../../infra/repositories/UserRepository.php";
 
 use Src\Core\Domains\Usecases\SignInUseCase;
-use UserRepositoryImpl;
+use Src\Infra\Repositories\UserRepositoryImpl;
 
 class SignInController {
     function execute() {

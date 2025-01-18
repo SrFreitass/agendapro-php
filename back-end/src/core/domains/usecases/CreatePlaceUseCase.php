@@ -1,5 +1,7 @@
 <?php
 
+namespace Src\Core\Domains\Usecases;
+
 use Src\Application\Utils\Response;
 use Src\Core\Domains\Entities\PlaceEntity;
 use Src\Core\Repositories\PlaceRepository;

@@ -1,9 +1,12 @@
 <?php
 
+namespace Src\Infra\Repositories;
+
 require_once __DIR__ . "/../../core/repositories/UserRepository.php";
 require_once __DIR__ . "/../database/db.php";
 require_once __DIR__ . "/../../core/domains/entities/UserEntity.php";
 
+use PDO;
 use Src\Core\Repositories\UserRepository;
 use Src\Core\Domains\Entities\UserEntity;
 use Src\Infra\Database\Database;

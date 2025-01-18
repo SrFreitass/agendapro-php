@@ -7,7 +7,7 @@ require_once __DIR__ . "/../../core/domains/usecases/CreateUserUseCase.php";
 require_once __DIR__ . "/../../infra/repositories/UserRepository.php";
 
 use Src\Core\Domains\Usecases\CreateUserUseCase;
-use UserRepositoryImpl;
+use Src\Infra\Repositories\UserRepositoryImpl;
 
 class CreateUserController {
     function execute() {
