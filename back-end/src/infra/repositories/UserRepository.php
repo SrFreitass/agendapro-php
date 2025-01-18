@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . "/../../core/repositories/CreateUserRepository.php";
+require_once __DIR__ . "/../../core/repositories/UserRepository.php";
 require_once __DIR__ . "/../database/db.php";
 require_once __DIR__ . "/../../core/domains/entities/UserEntity.php";
 
@@ -10,14 +10,14 @@ use Src\Infra\Database\Database;
 
 
 class UserRepositoryImpl implements UserRepository {
-    public Database $db;
+    private $database;
 
-    public function __construct() { 
-        $this->db = new Database();
+    public function __construct() {
+        $this->database = new Database();
     }
 
     public function create(UserEntity $user): bool {
-        $q = $this->db->query("INSERT INTO users VALUES (:id, :name, :email, :password, :role_id, :created_at, :updated_at, DEFAULT, :phone_number)");
+        $q = $this->database->query("INSERT INTO users VALUES (:id, :name, :email, :password, :role_id, :created_at, :updated_at, DEFAULT, :phone_number)");
          $q->bindParam(":id", $user->id);
          $q->bindParam(":name", $user->name);
          $q->bindParam(":email", $user->email);
@@ -32,7 +32,7 @@ class UserRepositoryImpl implements UserRepository {
     
 
     public function get(string $id = '', string $email = '') {
-        $q = $this->db->query('SELECT * FROM users WHERE id = :id OR email = :email');
+        $q = $this->database->query('SELECT * FROM users WHERE id = :id OR email = :email');
         $q->bindParam(':id', $id);
         $q->bindParam(':email', $email);
 

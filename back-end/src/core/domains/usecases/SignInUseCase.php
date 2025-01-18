@@ -68,7 +68,7 @@ class SignInUseCase {
         return Response::json(
             [
                 "success" => true,
-                "message" => "Usuário logado!"
+                "message" => "Usuário logado!",
             ],
             200
         );
