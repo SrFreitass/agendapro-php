@@ -1,12 +1,21 @@
 <?php
 
-require_once "../controllers/createSubscribeController.php";
-use Src\Application\Controllers\CreateSubscribeController;
+require_once __DIR__ . "/../controllers/CreateUserController.php";
+require_once __DIR__ . "/../controllers/SignInController.php";
+use Src\Application\Controllers\CreateUserController;
+use Src\Application\Controllers\SignInController;
 
 $routes = [
-    "/subscribe" => [
+    "/api/v1/signup" => [
         "controller" => function() {
-           $controller = new CreateSubscribeController();
+           $controller = new CreateUserController();
+           $controller->execute();
+        },
+        "method" => "POST"
+    ],
+    "/api/v1/signin" => [
+        "controller" => function() {
+           $controller = new SignInController();
            $controller->execute();
         },
         "method" => "POST"
