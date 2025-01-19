@@ -26,7 +26,7 @@ class SignInUseCase {
                     "message" => "Corpo inválido!"
                 ],
                 422
-            );
+            );  
         }
 
         if(!filter_var($body["email"], FILTER_VALIDATE_EMAIL)) {

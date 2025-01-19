@@ -10,4 +10,10 @@ interface PlaceRepository {
     public function createPlace(PlaceEntity $place);
 
     public function getPlaces();
+
+    public function getPlace(string $id);
+
+    public function getPlaceWithReservations(string $id);
+
+    public function deletePlace(string $id);
 }

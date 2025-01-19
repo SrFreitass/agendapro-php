@@ -33,6 +33,9 @@ CREATE TABLE IF NOT EXISTS reservations (
     user_id VARCHAR(13),
     place_id VARCHAR(13),
     datetime TIMESTAMP NOT NULL,
+    active BOOLEAN NOT NULL DEFAULT 1,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (place_id) REFERENCES places(id)
 );
