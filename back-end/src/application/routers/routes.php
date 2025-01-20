@@ -6,6 +6,7 @@ require_once __DIR__ . "/../controllers/CreatePlaceController.php";
 require_once __DIR__ . "/../controllers/GetPlacesController.php";
 require_once __DIR__ . "/../controllers/CreateReservationController.php";
 require_once __DIR__ . "/../controllers/DeleteReservationController.php";
+require_once __DIR__ . "/../controllers/UpdatePlaceController.php";
 
 use Src\Application\Controllers\CreatePlaceController;
 use Src\Application\Controllers\CreateReservationController;
@@ -59,6 +60,15 @@ $routes = [
             $controller->execute();
         },
         "method" => "DELETE"
+    ],
+
+
+    "/api/v1/update/place" => [
+        "controller" => function() {
+            $controller = new UpdatePlaceController();
+            $controller->execute();
+        },
+        "method" => "PUT"
     ]
 ];
 

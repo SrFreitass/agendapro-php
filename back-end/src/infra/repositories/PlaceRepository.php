@@ -72,6 +72,21 @@ class PlaceRepositoryImpl implements PlaceRepository {
         return $place;
     }
 
+    public function updatePlace(string $id, PlaceEntity $place) {
+        $q = $this->database->query(
+            "UPDATE places SET name = :name, description = :description, capacity = :capacity, image_url = :image_url, updated_at = :updated_at WHERE id = :id"
+        );
+
+        $q->bindParam(":id", $id);
+        $q->bindParam(":name", $place->name);
+        $q->bindParam(":description", $place->description);
+        $q->bindParam(":capacity", $place->capacity);
+        $q->bindParam(":image_url", $place->image_url);
+        $q->bindParam(":updated_at", $place->updated_at);
+
+        return $q->execute();
+    }
+
     public function deletePlace(string $id) {
         $q = $this->database->query("UPDATE places SET active = 0 WHERE id = :id");
 

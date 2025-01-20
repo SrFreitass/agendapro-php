@@ -15,5 +15,7 @@ interface PlaceRepository {
 
     public function getPlaceWithReservations(string $id);
 
+    public function updatePlace(string $id, PlaceEntity $place);
+
     public function deletePlace(string $id);
 }
