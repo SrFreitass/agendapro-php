@@ -1,5 +1,8 @@
+import { Categories } from "~/components/Categories";
 import { Place } from "~/components/Place";
 import { SearchCard } from "~/components/Search";
+import { SignIn } from "~/components/SignIn";
+import { SignUp } from "~/components/SignUp";
 
 
 export function Welcome() {
@@ -8,21 +11,25 @@ export function Welcome() {
       <SearchCard/>
       <div className="border-b mt-10"/>
       <br/>
-
-      <div className="flex justify-center flex-wrap gap-8">
-        <Place/>
-        <Place/>
-        <Place/>
-        <Place/>
-        <Place/>
-        <Place/>
-        <Place/>
-        <Place/>
-        <Place/>
-        <Place/>
-        <Place/>
-        <Place/>
-        <Place/>
+      <SignUp/>
+      <SignIn/>
+      <div className="max-w-[1500px] m-auto">
+        <Categories/>
+        <div className="grid grid-cols-4 gap-6">
+          <Place/>
+          <Place/>
+          <Place/>
+          <Place/>
+          <Place/>
+          <Place/>
+          <Place/>
+          <Place/>
+          <Place/>
+          <Place/>
+          <Place/>
+          <Place/>
+          <Place/>
+        </div>
       </div>
     </main>
   );
