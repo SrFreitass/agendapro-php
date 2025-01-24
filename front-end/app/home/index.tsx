@@ -5,7 +5,7 @@ import { SignIn } from "~/components/SignIn";
 import { SignUp } from "~/components/SignUp";
 
 
-export function Welcome() {
+export function HomePage() {
   return (
     <main className="">
       <SearchCard/>
