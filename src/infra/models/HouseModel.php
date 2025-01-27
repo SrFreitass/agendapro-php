@@ -36,4 +36,38 @@ class HouseModel {
     
         return $query->fetch();
     }
+
+    public function findAll() {
+        $query = $this->db->query("SELECT * FROM houses");
+        $query->execute();
+    
+        return $query->fetchAll();
+    }
+
+    public function findByName(string $name) {
+        $query = $this->db->query("SELECT * FROM houses WHERE LOWER(name) LIKE LOWER(:name)");
+
+        $name = "%$name%";
+
+        $query->bindParam(":name", $name);
+        $query->execute();
+    
+        return $query->fetchAll();
+    }
+
+    public function findByPrice(int $price) {
+        $query = $this->db->query("SELECT * FROM houses WHERE price <= :price");
+        $query->bindParam(":price", $price);
+        $query->execute();
+    
+        return $query->fetchAll();
+    }
+
+    public function findByCapacity(int $capacity) {
+        $query = $this->db->query("SELECT * FROM houses WHERE capacity >= :capacity");
+        $query->bindParam(":capacity", $capacity);
+        $query->execute();
+    
+        return $query->fetchAll();
+    }
 }

@@ -4,6 +4,7 @@ require_once __DIR__ . "/../controllers/auth/createAccountController.php";
 require_once __DIR__ . "/../controllers/auth/SignInController.php";
 require_once __DIR__ . "/../controllers/CreatePlaceController.php";
 require_once __DIR__ . "/../controllers/CreateReservationController.php";
+require_once __DIR__ . "/../controllers/GetHousesWithFilterController.php";
 
 $routes = [
     "signup" => [
@@ -31,6 +32,14 @@ $routes = [
         "method" => "POST",
         "controller" => function () {
             $controller = new CreateReservationController();
+            $controller->handle();
+        },
+    ],
+
+    "get_houses_with_filter" => [
+        "method" => "GET",
+        "controller" => function () {
+            $controller = new GetHousesWithFilterController();
             $controller->handle();
         },
     ],
