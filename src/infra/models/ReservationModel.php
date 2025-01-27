@@ -27,23 +27,37 @@ class ReservationModel {
         return $query->execute();
     }
 
+    public function findAll() {
+        $query = $this->db->query("SELECT users.name as user_name, houses.name as house_name, check_in, check_out FROM reservations INNER JOIN houses ON reservations.house_id = houses.id INNER JOIN users ON reservations.user_id = users.id WHERE reservations.is_deleted = 0 AND houses.is_deleted = 0 AND users.is_deleted = 0");
+        $query->execute();
+    
+        return $query->fetchAll();
+    }
+
     public function findByHouseId(string $id) {
-        $query = $this->db->query("SELECT * FROM reservations WHERE house_id = :id");
+        $query = $this->db->query("SELECT * FROM reservations WHERE house_id = :id AND is_deleted = 0");
         $query->bindParam(":id", $id);
         $query->execute();
     
         return $query->fetchAll();
     }
 
+    public function deleteById(string $id) {
+        $query = $this->db->query("UPDATE reservations SET is_deleted = 1 WHERE id = :id");
+        $query->bindParam(":id", $id);
+    
+        return $query->execute();
+    }
+
     public function count() {
-        $query = $this->db->query("SELECT COUNT(*) as total FROM reservations");
+        $query = $this->db->query("SELECT COUNT(*) as total FROM reservations WHERE is_deleted = 0");
         $query->execute();
     
         return $query->fetch();
     }
 
     public function countMonthly() {
-        $query = $this->db->query("SELECT COUNT(*) as total FROM reservations WHERE MONTH(check_in) = MONTH(CURRENT_DATE())");
+        $query = $this->db->query("SELECT COUNT(*) as total FROM reservations WHERE MONTH(check_in) = MONTH(CURRENT_DATE()) AND YEAR(check_in) = YEAR(CURRENT_DATE()) AND is_deleted = 0");
         $query->execute();
     
         return $query->fetch();
@@ -53,7 +67,7 @@ class ReservationModel {
         $query = $this->db->query("
         SELECT DATE_FORMAT(check_in, '%Y-%m') AS month, COUNT(*) AS total
         FROM reservations
-        WHERE YEAR(check_in) = YEAR(CURRENT_DATE())
+        WHERE YEAR(check_in) = YEAR(CURRENT_DATE()) AND is_deleted = 0
         GROUP BY month;
         ");
         $query->execute();

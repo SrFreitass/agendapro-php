@@ -1,3 +1,7 @@
+<?php
+    $houses = (new GetHousesController())->handle();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,31 +77,41 @@
             </a>
         </div>
         <div class="flex flex-wrap gap-4">
-            <div class='!bg-white w-[25rem] h-full drop-shadow-lg rounded-xl'>
-                <img src='https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&q=80' alt='Main image' class='w-full h-[15rem] object-cover rounded-t-xl'>
-                <div class='h-full p-4 flex flex-col justify-between gap-4'>
-                    <div class="flex flex-col gap-4">
-                        <h2 class='!text-lg !font-semibold'>{$house['name']}</h2>
-                        <h3 class='!text-sm flex items-center gap-2'>
-                            {$house['city']}, {$house['state']}
-                        </h3>
-                        
-                        <h3 class='!text-sm !font-semibold !text-blue-500'>
-                            R$ {$house['price']} / noite
-                        </h3>
-                    </div>
+            <?php
 
-                    <div class="flex justify-between gap-2">
-                        <a href='http://localhost:3000/admin/houses/edit?id={$house['id']}' class='!text-sm !font-semibold !bg-blue-500/20 w-1/2 py-2 rounded-xl flex justify-center'>
-                            <i data-lucide="square-pen"></i>
-                        </a>
-                        <a href='http://localhost:3000/admin/houses/delete?id={$house['id']}' class='!text-sm !font-semibold !bg-red-500/20 w-1/2 py-2 rounded-xl !text-red-500 flex justify-center'>
-                            <i data-lucide="trash-2"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+                foreach($houses as $house) {
+                    $image_url = explode(",", $house['images'])[0];
+                    $id = $house['id'];
+                    
+                    echo /*html*/ "
+                        <div class='!bg-white w-[25rem] h-full drop-shadow-lg rounded-xl'>
+                            <img src='http://localhost:3000/public$image_url' alt='Main image' class='w-full h-[15rem] object-cover rounded-t-xl'>
+                            <div class='h-full p-4 flex flex-col justify-between gap-4'>
+                                <div class='flex flex-col gap-4'>
+                                    <h2 class='!text-lg !font-semibold'>{$house['name']}</h2>
+                                    <h3 class='!text-sm flex items-center gap-2'>
+                                        {$house['city']}, {$house['state']}
+                                    </h3>
+                                    
+                                    <h3 class='!text-sm !font-semibold !text-blue-500'>
+                                        R$ {$house['price']} / noite
+                                    </h3>
+                                </div>
 
+                                <div class='flex justify-between gap-2'>
+                                    <a href='http://localhost:3000/admin/houses/edit?id=$id' class='!text-sm !font-semibold !bg-blue-500/20 w-1/2 py-2 rounded-xl flex justify-center'>
+                                        <i data-lucide='square-pen'></i>
+                                    </a>
+                                    <a href='http://localhost:3000/admin/houses/delete?id=$id' class='!text-sm !font-semibold !bg-red-500/20 w-1/2 py-2 rounded-xl !text-red-500 flex justify-center'>
+                                        <i data-lucide='trash-2'></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    ";
+                }
+
+            ?>
             <div class=''>
             </div>
         </div>

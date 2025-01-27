@@ -30,7 +30,7 @@ class HouseModel {
     }
 
     public function findById(string $id) {
-        $query = $this->db->query("SELECT * FROM houses WHERE id = :id");
+        $query = $this->db->query("SELECT * FROM houses WHERE id = :id AND is_deleted = 0");
         $query->bindParam(":id", $id);
         $query->execute();
     
@@ -38,14 +38,14 @@ class HouseModel {
     }
 
     public function findAll() {
-        $query = $this->db->query("SELECT * FROM houses");
+        $query = $this->db->query("SELECT * FROM houses WHERE is_deleted = 0");
         $query->execute();
     
         return $query->fetchAll();
     }
 
     public function findByName(string $name) {
-        $query = $this->db->query("SELECT * FROM houses WHERE LOWER(name) LIKE LOWER(:name)");
+        $query = $this->db->query("SELECT * FROM houses WHERE LOWER(name) LIKE LOWER(:name) AND is_deleted = 0");
 
         $name = "%$name%";
 
@@ -56,7 +56,7 @@ class HouseModel {
     }
 
     public function findByPrice(int $price) {
-        $query = $this->db->query("SELECT * FROM houses WHERE price <= :price");
+        $query = $this->db->query("SELECT * FROM houses WHERE price <= :price AND is_deleted = 0");
         $query->bindParam(":price", $price);
         $query->execute();
     
@@ -64,7 +64,7 @@ class HouseModel {
     }
 
     public function findByCapacity(int $capacity) {
-        $query = $this->db->query("SELECT * FROM houses WHERE capacity >= :capacity");
+        $query = $this->db->query("SELECT * FROM houses WHERE capacity >= :capacity AND is_deleted = 0");
         $query->bindParam(":capacity", $capacity);
         $query->execute();
     
@@ -72,7 +72,7 @@ class HouseModel {
     }
 
     public function count() {
-        $query = $this->db->query("SELECT COUNT(*) as total FROM houses");
+        $query = $this->db->query("SELECT COUNT(*) as total FROM houses WHERE is_deleted = 0");
 
         $query->execute();
 

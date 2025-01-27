@@ -20,16 +20,30 @@ class UserModel {
         return $query->execute();
     }
 
+    public function findAll() {
+        $query = $this->db->query("SELECT * FROM users WHERE is_deleted = 0");
+        $query->execute();
+    
+        return $query->fetchAll();
+    }
+
     public function findByEmail(string $email) {
-        $query = $this->db->query("SELECT * FROM users WHERE email = :email");
+        $query = $this->db->query("SELECT * FROM users WHERE email = :email AND is_deleted = 0");
         $query->bindParam(":email", $email);
         $query->execute();
     
         return $query->fetch();
     }
 
+    public function deleteById(string $id) {
+        $query = $this->db->query("UPDATE users SET is_deleted = 1 WHERE id = :id AND is_deleted = 0");
+        $query->bindParam(":id", $id);
+    
+        return $query->execute();
+    }
+
     public function count() {
-        $query = $this->db->query("SELECT COUNT(*) as total FROM users");
+        $query = $this->db->query("SELECT COUNT(*) as total FROM users WHERE is_deleted = 0");
         $query->execute();
     
         return $query->fetch();

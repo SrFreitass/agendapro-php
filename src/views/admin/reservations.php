@@ -1,3 +1,11 @@
+<?php
+    require __DIR__ . "/../../controllers/GetReservationsController.php";
+
+    $reservations = (new GetReservationsController())->handle();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,47 +82,35 @@
                 <th class="!font-normal !text-sm !bg-gray-100">AÇÕES</th>
             </tr>
 
-            <tr>
-                <td class="py-3">
-                    João da Silva
-                </td>
-                <td class="py-3">
-                   Casa do João
-                </td>
-                <td class="py-3">
-                    20/10/2021
-                </td>
-                <td class="py-3">
-                    25/10/2021
-                </td>
-                <td>
-                    <a>
-                        <i data-lucide="trash-2" class="text-red-500"></i>
-                    </a>
-                </td>
-            </tr>
+            <?php
 
-            <tr>
-                <td class="py-3">
-                    João da Silva
-                </td>
-                <td class="py-3">
-                   Casa do João
-                </td>
-                <td class="py-3">
-                    20/10/2021
-                </td>
-                <td class="py-3">
-                    25/10/2021
-                </td>
-                <td class="py-3">
-                    <a>
-                        <i data-lucide="trash-2" class="text-red-500"></i>
-                    </a>
-                </td>
-            </tr>
-         
-  
+                if(count($reservations) === 0) {
+                    echo "<tr><td colspan='5' class='py-3 text-center'>Nenhuma reserva encontrada</td></tr>";
+                }
+
+                foreach($reservations as $reservation) {
+                    echo "<tr>";
+                    echo "<td class='py-3'>";
+                    echo $reservation["user_name"];
+                    echo "</td>";
+                    echo "<td class='py-3'>";
+                    echo $reservation["house_name"];
+                    echo "</td>";
+                    echo "<td class='py-3'>";
+                    echo $reservation["check_in"];
+                    echo "</td>";
+                    echo "<td class='py-3'>";
+                    echo $reservation["check_out"];
+                    echo "</td>";
+                    echo "<td>";
+                    echo "<a>";
+                    echo "<i data-lucide='trash-2' class='text-red-500'></i>";
+                    echo "</a>";
+                    echo "</td>";
+                    echo "</tr>";
+                }
+
+            ?>  
         </tbody>
         </table>
     </div>

@@ -5,7 +5,8 @@ CREATE TABLE IF NOT EXISTS users (
   password VARCHAR(255) NOT NULL,
   avatar_url VARCHAR(255) NOT NULL,
   role ENUM('admin', 'user') DEFAULT 'user',
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  is_deleted BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE IF NOT EXISTS houses (
@@ -18,7 +19,8 @@ CREATE TABLE IF NOT EXISTS houses (
   price DECIMAL(10, 2) NOT NULL,
   rooms INT NOT NULL,
   capacity INT NOT NULL,
-  images_url TEXT NOT NULL
+  images_url TEXT NOT NULL,
+  is_deleted BOOLEAN DEFAULT FALSE,
 );
 
 CREATE TABLE IF NOT EXISTS reservations (
