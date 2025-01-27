@@ -27,4 +27,11 @@ class UserModel {
     
         return $query->fetch();
     }
+
+    public function count() {
+        $query = $this->db->query("SELECT COUNT(*) as total FROM users");
+        $query->execute();
+    
+        return $query->fetch();
+    }
 }

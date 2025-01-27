@@ -50,7 +50,7 @@
 <body class="min-h-screen">
     <div class="max-w-[75rem] m-auto p-4">
         <form class="flex items-center gap-4 p-5 bg-white drop-shadow-lg rounded-xl" method="get">
-            <input type="text" class="input" name="name" placeholder="Pesquisar pelo nomes">
+            <input type="text" class="input !max-w-[30rem]" name="name" placeholder="Pesquisar pelo nomes">
             
             <div class="select">
                 <select name="price" onchange="this.form.submit()">
@@ -108,11 +108,18 @@
                                         <i data-lucide='map-pin'></i>
                                         {$house['city']}, {$house['state']}
                                     </h3>
-                            
-                                    <h3 class='!text-sm flex items-center gap-2'>
-                                        <i data-lucide='users'></i>
-                                        {$house['capacity']} hóspedes
-                                    </h3>
+
+                                    <div class='flex justify-between'>
+                                        <h3 class='!text-sm flex items-center gap-2'>
+                                            <i data-lucide='bed-double'></i>
+                                            {$house['rooms']} quartos
+                                        </h3>
+
+                                        <h3 class='!text-sm flex items-center gap-2'>
+                                            <i data-lucide='users'></i>
+                                            Até {$house['capacity']} hóspedes
+                                        </h3>
+                                    </div>
                                 </div>
 
                                 <div class='absolute top-4 right-2 bg-white p-2 px-4 rounded-full'>

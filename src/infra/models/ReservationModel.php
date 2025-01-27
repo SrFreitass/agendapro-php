@@ -34,4 +34,30 @@ class ReservationModel {
     
         return $query->fetchAll();
     }
+
+    public function count() {
+        $query = $this->db->query("SELECT COUNT(*) as total FROM reservations");
+        $query->execute();
+    
+        return $query->fetch();
+    }
+
+    public function countMonthly() {
+        $query = $this->db->query("SELECT COUNT(*) as total FROM reservations WHERE MONTH(check_in) = MONTH(CURRENT_DATE())");
+        $query->execute();
+    
+        return $query->fetch();
+    }
+
+    public function countReservationsByMonth() {
+        $query = $this->db->query("
+        SELECT DATE_FORMAT(check_in, '%Y-%m') AS month, COUNT(*) AS total
+        FROM reservations
+        WHERE YEAR(check_in) = YEAR(CURRENT_DATE())
+        GROUP BY month;
+        ");
+        $query->execute();
+    
+        return $query->fetchAll();
+    }
 }

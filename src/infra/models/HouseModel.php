@@ -70,4 +70,12 @@ class HouseModel {
     
         return $query->fetchAll();
     }
+
+    public function count() {
+        $query = $this->db->query("SELECT COUNT(*) as total FROM houses");
+
+        $query->execute();
+
+        return $query->fetch();
+    }
 }
