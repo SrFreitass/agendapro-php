@@ -1,4 +1,9 @@
 <?php
+    require_once __DIR__ . '/../../../src/controllers/GetHousesController.php';
+    require_once __DIR__ . "/../../middlewares/AdminMiddleware.php";
+
+    AdminMiddleware();
+
     $houses = (new GetHousesController())->handle();
 ?>
 
@@ -63,13 +68,20 @@
                     Usuários
                 </a>
             </li>
+
+            <li>
+                <a href="../home" class="pl-2 py-2 flex items-center gap-2 !font-medium">
+                    <i data-lucide="log-out"></i>
+                    Sair
+                </a>
+            </li>
         </ul>
     </aside>
     <main class="p-10 w-[80%]">
         <div class="flex justify-between">
             <h1 class="!text-2xl !font-semibold !mb-8">Gerenciar Casas</h1>
 
-            <a href="">
+            <a href="../place/create.php">
                 <button class="flex items-center gap-2 !bg-blue-500 !text-white !font-semibold !rounded-xl !py-2 px-5">
                     <i data-lucide="plus"></i>
                     Nova casa
@@ -80,12 +92,12 @@
             <?php
 
                 foreach($houses as $house) {
-                    $image_url = explode(",", $house['images'])[0];
+                    $image_url = explode(",", $house['images_url'])[0];
                     $id = $house['id'];
-                    
+
                     echo /*html*/ "
                         <div class='!bg-white w-[25rem] h-full drop-shadow-lg rounded-xl'>
-                            <img src='http://localhost:3000/public$image_url' alt='Main image' class='w-full h-[15rem] object-cover rounded-t-xl'>
+                        <img src='http://localhost:3000/public$image_url' alt='Main image' class='w-full min-h-[14rem] max-h-[14rem] object-cover rounded-t-xl'>
                             <div class='h-full p-4 flex flex-col justify-between gap-4'>
                                 <div class='flex flex-col gap-4'>
                                     <h2 class='!text-lg !font-semibold'>{$house['name']}</h2>
@@ -99,10 +111,10 @@
                                 </div>
 
                                 <div class='flex justify-between gap-2'>
-                                    <a href='http://localhost:3000/admin/houses/edit?id=$id' class='!text-sm !font-semibold !bg-blue-500/20 w-1/2 py-2 rounded-xl flex justify-center'>
+                                    <a href='../place/create.php?edit&id=$id' class='!text-sm !font-semibold !bg-blue-500/20 w-1/2 py-2 rounded-xl flex justify-center'>
                                         <i data-lucide='square-pen'></i>
                                     </a>
-                                    <a href='http://localhost:3000/admin/houses/delete?id=$id' class='!text-sm !font-semibold !bg-red-500/20 w-1/2 py-2 rounded-xl !text-red-500 flex justify-center'>
+                                    <a href='../../routes/route.php?controller=delete_house_by_id&id=$id' class='!text-sm !font-semibold !bg-red-500/20 w-1/2 py-2 rounded-xl !text-red-500 flex justify-center'>
                                         <i data-lucide='trash-2'></i>
                                     </a>
                                 </div>

@@ -28,7 +28,7 @@ class ReservationModel {
     }
 
     public function findAll() {
-        $query = $this->db->query("SELECT users.name as user_name, houses.name as house_name, check_in, check_out FROM reservations INNER JOIN houses ON reservations.house_id = houses.id INNER JOIN users ON reservations.user_id = users.id WHERE reservations.is_deleted = 0 AND houses.is_deleted = 0 AND users.is_deleted = 0");
+        $query = $this->db->query("SELECT reservations.id as id, users.name as user_name, houses.name as house_name, check_in, check_out FROM reservations INNER JOIN houses ON reservations.house_id = houses.id INNER JOIN users ON reservations.user_id = users.id WHERE reservations.is_deleted = 0 AND houses.is_deleted = 0 AND users.is_deleted = 0");
         $query->execute();
     
         return $query->fetchAll();

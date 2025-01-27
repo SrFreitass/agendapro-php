@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/../infra/models/userModel.php";
 
-function loggedMiddleware() {
+function AdminMiddleware() {
     error_reporting(E_ALL ^ E_NOTICE);  
     session_start();
 
@@ -12,8 +12,15 @@ function loggedMiddleware() {
         return header("Location: ../views/auth/signin.php");
     }
 
-    if(!$userModel->findById($_SESSION["user_id"])) {
+    $user = $userModel->findById($_SESSION["user_id"]);
+
+
+    if(!$user) {
         return header("Location: ../views/auth/signin.php");
+    }
+
+    if($user["role"] !== "admin") {
+        return header("Location: ../../views/home");
     }
 }   
 

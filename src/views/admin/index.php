@@ -1,5 +1,8 @@
 <?php
     require_once __DIR__ . "/../../controllers/GetMetricsController.php";
+    require_once __DIR__ . "/../../middlewares/AdminMiddleware.php";
+
+    AdminMiddleware();
 
     $metrics = (new GetMetricsController())->handle();
 
@@ -25,6 +28,9 @@
         * {
             font-family: 'Poppins', sans-serif !important;
         }
+
+   
+
         body {
             background-color: #f9fafb;
         }

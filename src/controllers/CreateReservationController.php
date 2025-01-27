@@ -4,7 +4,7 @@ require_once __DIR__ . "/../infra/models/ReservationModel.php";
 require_once __DIR__ . "/../infra/models/HouseModel.php";
 require_once __DIR__ . "/../middlewares/LoggedMiddleware.php";
 
-loggedMiddleware();
+LoggedMiddleware();
 
 class CreateReservationController {
     private $reservationModel; 

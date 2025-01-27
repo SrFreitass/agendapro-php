@@ -1,9 +1,3 @@
-<?php
-    require_once __DIR__ . "/../../middlewares/NotLoggedMiddleware.php";
-
-    notLoggedMiddleware();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

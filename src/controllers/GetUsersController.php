@@ -2,9 +2,9 @@
 
 require_once __DIR__ . "/../infra/models/userModel.php";
 require_once __DIR__ . "/../infra/models/HouseModel.php";
-require_once __DIR__ . "/../middlewares/LoggedMiddleware.php";
+require_once __DIR__ . "/../middlewares/AdminMiddleware.php";
 
-loggedMiddleware();
+AdminMiddleware();
 
 class GetUsersController {
     private $userModel; 

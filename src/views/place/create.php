@@ -1,9 +1,55 @@
 <?php
 
 require_once __DIR__ . "/../../middlewares/LoggedMiddleware.php";
+require_once __DIR__ . "/../../controllers/GetHouseController.php";
 
 if(isset($_GET["success"])) {
     echo "<script>alert('Espaço criado com sucesso!')</script>";
+}
+
+$house = [];
+
+if(isset($_GET["edit"]) && isset($_GET["id"])) {
+    $house = (new GetHouseController())->handle();
+    $house_id = $_GET["id"];
+}   
+
+$states = [
+    "<option value='AC'>Acre</option>",
+    "<option value='AL'>Alagoas</option>",
+    "<option value='AP'>Amapá</option>",
+    "<option value='AM'>Amazonas</option>",
+    "<option value='BA'>Bahia</option>",
+    "<option value='CE'>Ceará</option>",
+    "<option value='DF'>Distrito Federal</option>",
+    "<option value='ES'>Espírito Santo</option>",
+    "<option value='GO'>Goiás</option>",
+    "<option value='MA'>Maranhão</option>",
+    "<option value='MT'>Mato Grosso</option>",
+    "<option value='MS'>Mato Grosso do Sul</option>",
+    "<option value='MG'>Minas Gerais</option>",
+    "<option value='PA'>Pará</option>",
+    "<option value='PB'>Paraíba</option>",
+    "<option value='PR'>Paraná</option>",
+    "<option value='PE'>Pernambuco</option>",
+    "<option value='PI'>Piauí</option>",
+    "<option value='RJ'>Rio de Janeiro</option>",
+    "<option value='RN'>Rio Grande do Norte</option>",
+    "<option value='RS'>Rio Grande do Sul</option>",
+    "<option value='RO'>Rondônia</option>",
+    "<option value='RR'>Roraima</option>",
+    "<option value='SC'>Santa Catarina</option>",
+    "<option value='SP'>São Paulo</option>",
+    "<option value='SE'>Sergipe</option>",
+    "<option value='TO'>Tocantins</option>",
+];
+
+if(isset($house['state'])) {
+    foreach($states as $key => $state) {
+        if(strpos($state, $house['state']) !== false) {
+            $states[$key] = str_replace("option", "option selected=selected", $state);
+        }
+    }
 }
 
 ?>
@@ -33,8 +79,10 @@ if(isset($_GET["success"])) {
     <title>Document</title>
 </head>
 <body class="!py-10">
-    <form enctype="multipart/form-data" class="flex flex-col gap-4 max-w-[50rem] m-auto p-4 bg-white drop-shadow-lg rounded-xl p-5" action="../../routes/route.php?controller=create_place" method="POST">
-        <h2 class="!text-3xl !font-semibold">Criar novo espaço</h2>
+    <form enctype="multipart/form-data" class="flex flex-col gap-4 max-w-[50rem] m-auto p-4 bg-white drop-shadow-lg rounded-xl p-5" action="../../routes/route.php?controller=<?= isset($_GET['edit']) ? 'update_house_by_id&id=' . $house_id : 'create_place' ?>" method="POST">
+        <h2 class="!text-3xl !font-semibold">
+            <?= isset($_GET["edit"]) ? "Editar espaço" : "Criar novo espaço" ?>
+        </h2>
         <h3 class="!text-xl !font-medium">
             Informações Básicas
         </h3>
@@ -42,7 +90,7 @@ if(isset($_GET["success"])) {
         <div class="flex flex-col">
             <label class="mb-2">Nome</label>
             <p class="control has-icons-left has-icons-right">
-                <input class="input" type="text" name="name" required />
+                <input class="input" type="text" name="name" required value="<?= isset($house['name']) ? $house['name'] : '' ?>"/>
                 <span class="icon is-small is-left">
                     <i data-lucide="house"></i>
                 </span>
@@ -51,7 +99,7 @@ if(isset($_GET["success"])) {
 
         <div class="flex flex-col">
             <label class="mb-2">Descrição</label>
-            <textarea class="textarea" name="description" id="" required>
+            <textarea class="textarea" name="description" id="" required value="<?= isset($house['description']) ? $house['description'] : '' ?>">
             </textarea>
         </div>
 
@@ -64,7 +112,7 @@ if(isset($_GET["success"])) {
             <div class="flex flex-col flex-grow-1">
                 <label class="mb-2">Endereço</label>
                 <p class="control has-icons-left has-icons-right">
-                    <input class="input" type="text" name="address"  required/>
+                    <input class="input" type="text" name="address"  required value="<?= isset($house['address']) ? $house['address']  : '' ?>" />
                     <span class="icon is-small is-left">
                         <i data-lucide="map-pin"></i>
                     </span>
@@ -73,43 +121,23 @@ if(isset($_GET["success"])) {
 
             <div class="flex flex-col ">
                 <label class="mb-2">Cidade</label>
-                <input class="input" type="text" name="city" required/>
+                <input class="input" type="text" name="city" required value="<?= isset($house['city']) ? $house['city']  : '' ?>"/>
             </div>
 
             <div class="flex flex-col">
                 <label class="mb-2">Estado</label>
                 <div class="select">
                     <select name="state" required>
-                        <option>
-                            Selecione um estado
-                        </option>
-                        <option value="AC">Acre</option>
-                        <option value="AL">Alagoas</option>
-                        <option value="AP">Amapá</option>
-                        <option value="AM">Amazonas</option>
-                        <option value="BA">Bahia</option>
-                        <option value="CE">Ceará</option>
-                        <option value="DF">Distrito Federal</option>
-                        <option value="ES">Espírito Santo</option>
-                        <option value="GO">Goiás</option>
-                        <option value="MA">Maranhão</option>
-                        <option value="MT">Mato Grosso</option>
-                        <option value="MS">Mato Grosso do Sul</option>
-                        <option value="MG">Minas Gerais</option>
-                        <option value="PA">Pará</option>
-                        <option value="PB">Paraíba</option>
-                        <option value="PR">Paraná</option>
-                        <option value="PE">Pernambuco</option>
-                        <option value="PI">Piauí</option>
-                        <option value="RJ">Rio de Janeiro</option>
-                        <option value="RN">Rio Grande do Norte</option>
-                        <option value="RS">Rio Grande do Sul</option>
-                        <option value="RO">Rondônia</option>
-                        <option value="RR">Roraima</option>
-                        <option value="SC">Santa Catarina</option>
-                        <option value="SP">São Paulo</option>
-                        <option value="SE">Sergipe</option>
-                        <option value="TO">Tocantins</option>
+                        <?php
+                            isset($_GET["edit"]) ?
+                            ""
+                            : "
+                            <option>
+                                Selecione um estado
+                            </option>
+                         "
+                        ?>
+                        <?= join("", $states); ?>
                     </select>
                 </div>
             </div>
@@ -127,7 +155,7 @@ if(isset($_GET["success"])) {
                     Preço por noite
                 </label>
                 <p class="control has-icons-left has-icons-right">
-                    <input class="input pr-2" type="number" name="price" required/>
+                    <input class="input pr-2" type="number" name="price" required value="<?= isset($house['price']) ? $house['price'] : '' ?>"/>
                     <span class="icon is-small is-left">
                         <i data-lucide="dollar-sign"></i>
                     </span>
@@ -137,7 +165,7 @@ if(isset($_GET["success"])) {
             <div class="flex flex-grow-1 flex-col gap-2">
                 <label for="">Número de quartos</label>
                 <p class="control has-icons-left has-icons-right">
-                    <input class="input pr-2" type="number" name="rooms" required/>
+                    <input class="input pr-2" type="number" name="rooms" required value="<?= isset($house['rooms']) ? $house['rooms'] : '' ?>"/>
                     <span class="icon is-small is-left">
                         <i data-lucide="bed-double"></i>
                     </span>
@@ -147,7 +175,7 @@ if(isset($_GET["success"])) {
             <div class="flex flex-grow-1 flex-col gap-2">
                 <label for="">Capacidade máxima</label>
                 <p class="control has-icons-left has-icons-right">
-                    <input class="input pr-2" type="number" name="capacity" required/>
+                    <input class="input pr-2" type="number" name="capacity" required value="<?= isset($house['capacity']) ? $house['capacity'] : '' ?>"/>
                     <span class="icon is-small is-left">
                         <i data-lucide="users"></i>
                     </span>
@@ -167,11 +195,11 @@ if(isset($_GET["success"])) {
             <small>
                 PNG, JPG, GIF, SVG até 10MB
             </small>
-            <input type="file" name="images" multiple class="absolute w-full h-full text-white" required/>
+            <input type="file" name="images" onchange="alert('Image upada com sucesso!')" class="absolute w-full h-full text-white" required/>
         </div>
 
         <button class="button !bg-blue-600 !text-white py-3 w-full">
-            Criar espaço
+            <?= isset($_GET["edit"]) ? "Editar espaço" : "Criar espaço" ?>
         </button>
     </form>
     <script>

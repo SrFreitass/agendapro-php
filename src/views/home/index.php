@@ -101,7 +101,7 @@
                     echo /*html*/"
                         <a href='./place?id=$id' class='relative'>
                             <div class='bg-white w-[25rem] h-[23rem] drop-shadow-lg rounded-xl pb-5 m-auto'>
-                                <img src='http://localhost:3000/public$image_url' alt='Main image' class='w-full h-[15rem] object-cover rounded-t-xl'>
+                                <img src='http://localhost:3000/public$image_url' alt='Main image' class='w-full min-h-[14rem] max-h-[14rem] object-cover rounded-t-xl'>
                                 <div class='p-4 flex flex-col gap-4'>
                                     <h2 class='!text-lg !font-semibold'>{$house['name']}</h2>
                                     <h3 class='!text-sm flex items-center gap-2'>

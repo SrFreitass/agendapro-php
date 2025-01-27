@@ -1,7 +1,9 @@
 <?php
 
 require_once __DIR__ . "/../infra/models/HouseModel.php";
-require_once __DIR__ . "/../middlewares/LoggedMiddleware.php";
+require_once __DIR__ . "/../middlewares/AdminMiddleware.php";
+
+AdminMiddleware();
 
 
 class CreatePlaceController {

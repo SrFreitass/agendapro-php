@@ -1,5 +1,8 @@
 <?php
 require_once __DIR__ . "/../infra/models/HouseModel.php";
+require_once __DIR__ . "/../middlewares/LoggedMiddleware.php";
+
+LoggedMiddleware();
 
 class GetHousesWithFilterController {
     private $houseModel;

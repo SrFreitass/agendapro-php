@@ -13,7 +13,7 @@ class UserModel {
         $query = $this->db->query("INSERT INTO users (id, name, email, password, avatar_url) VALUES (:id, :name, :email, :password, :avatar)");
         $query->bindParam(":id", $id);
         $query->bindParam(":name", $name);
-        $query->bindParam(":email", $email);
+        $query->bindParam(":email", var: $email);
         $query->bindParam(":password", $password);
         $query->bindParam(":avatar", $avatar);
     
@@ -30,6 +30,14 @@ class UserModel {
     public function findByEmail(string $email) {
         $query = $this->db->query("SELECT * FROM users WHERE email = :email AND is_deleted = 0");
         $query->bindParam(":email", $email);
+        $query->execute();
+    
+        return $query->fetch();
+    }
+
+    public function findById(string $id) {
+        $query = $this->db->query("SELECT * FROM users WHERE id = :id AND is_deleted = 0");
+        $query->bindParam(":id", $id);
         $query->execute();
     
         return $query->fetch();

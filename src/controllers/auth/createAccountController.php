@@ -1,7 +1,6 @@
 <?php
 
 require_once __DIR__ . "/../../infra/models/UserModel.php";
-require_once __DIR__ . "/../../middlewares/notLoggedMiddleware.php";
 
 
 class CreateAccountController {
@@ -12,8 +11,7 @@ class CreateAccountController {
     }
 
     public function handle() {
-        notLoggedMiddleware();
-        
+   
         if(
             !isset($_POST["name"]) ||
             !isset($_POST["email"]) ||

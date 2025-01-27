@@ -1,5 +1,8 @@
 <?php
     require __DIR__ . "/../../controllers/GetReservationsController.php";
+    require_once __DIR__ . "/../../middlewares/AdminMiddleware.php";
+
+    AdminMiddleware();
 
     $reservations = (new GetReservationsController())->handle();
 
@@ -67,6 +70,13 @@
                     Usuários
                 </a>
             </li>
+
+            <li>
+                <a href="../home" class="pl-2 py-2 flex items-center gap-2 !font-medium">
+                    <i data-lucide="log-out"></i>
+                    Sair
+                </a>
+            </li>
         </ul>
     </aside>
     <div class="p-10 w-[80%]">
@@ -82,35 +92,29 @@
                 <th class="!font-normal !text-sm !bg-gray-100">AÇÕES</th>
             </tr>
 
-            <?php
+            <?php foreach ($reservations as $reservation): ?>
+                <?php $id = $reservation["id"] ?>
 
-                if(count($reservations) === 0) {
-                    echo "<tr><td colspan='5' class='py-3 text-center'>Nenhuma reserva encontrada</td></tr>";
-                }
-
-                foreach($reservations as $reservation) {
-                    echo "<tr>";
-                    echo "<td class='py-3'>";
-                    echo $reservation["user_name"];
-                    echo "</td>";
-                    echo "<td class='py-3'>";
-                    echo $reservation["house_name"];
-                    echo "</td>";
-                    echo "<td class='py-3'>";
-                    echo $reservation["check_in"];
-                    echo "</td>";
-                    echo "<td class='py-3'>";
-                    echo $reservation["check_out"];
-                    echo "</td>";
-                    echo "<td>";
-                    echo "<a>";
-                    echo "<i data-lucide='trash-2' class='text-red-500'></i>";
-                    echo "</a>";
-                    echo "</td>";
-                    echo "</tr>";
-                }
-
-            ?>  
+                <tr>
+                    <td class="py-3">
+                        <?= $reservation["user_name"] ?>
+                    </td>
+                    <td class="py-3">
+                        <?= $reservation["house_name"] ?>
+                    </td>
+                    <td class="py-3">
+                        <?= $reservation["check_in"] ?>
+                    </td>
+                    <td class="py-3">
+                        <?= $reservation["check_out"] ?>
+                    </td>
+                    <td>
+                        <a href="../../routes/route.php?controller=delete_reservation_by_id&id=<?=$id?>">
+                            <i data-lucide="trash-2" class="text-red-500"></i>
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
         </table>
     </div>

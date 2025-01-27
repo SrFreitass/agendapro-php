@@ -62,7 +62,7 @@
 
         <div class="mt-16 w-1/2 pr-16">
             <h2 class="!text-3xl !font-semibold">Faça sua reserva</h2>
-            <form class="mt-4" action="../../routes/route.php?controller=create_reservation" method="POST">
+            <form class="mt-4" action="../routes/route.php?controller=create_reservation" method="POST">
                 <input type="hidden" name="house_id" value="<?= $house["id"] ?>">
 
                 <div class="flex gap-4">

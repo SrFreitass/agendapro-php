@@ -1,3 +1,12 @@
+<?php
+    require_once __DIR__ . '/../../../src/controllers/GetUsersController.php';
+    require_once __DIR__ . "/../../middlewares/AdminMiddleware.php";
+
+    AdminMiddleware();
+
+    $users = (new GetUsersController())->handle();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,6 +68,13 @@
                     Usuários
                 </a>
             </li>
+
+            <li>
+                <a href="../home" class="pl-2 py-2 flex items-center gap-2 !font-medium">
+                    <i data-lucide="log-out"></i>
+                    Sair
+                </a>
+            </li>
         </ul>
     </aside>
     <div class="p-10 w-[80%]">
@@ -73,41 +89,20 @@
                 <th class="!font-normal !text-sm !bg-gray-100">AÇÕES</th>
             </tr>
 
-            <tr>
-                <td class="py-3">
-                    João da Silva
-                </td>
-                <td class="py-3">
-                   joao@example.com
-                </td>
-                <td class="py-3">
-                   (11) 99999-9999
-                </td>
-
-                <td>
-                    <a>
-                        <i data-lucide="trash-2" class="text-red-500"></i>
-                    </a>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="py-3">
-                    João da Silva
-                </td>
-                <td class="py-3">
-                   joao@example.com
-                </td>
-                <td class="py-3">
-                   (11) 99999-9999
-                </td>
-    
-                <td class="py-3">
-                    <a>
-                        <i data-lucide="trash-2" class="text-red-500"></i>
-                    </a>
-                </td>
-            </tr>
+            <?php foreach ($users as $user): ?>
+                <tr>
+                    <td><?= $user['name'] ?></td>
+                    <td><?= $user['email'] ?></td>
+                    <td><?= isset($user['phone_number']) ? $user['phone_number'] : "(00) 00000-0000" ?></td>
+                    <td>
+                        <a href="../../routes/route.php?controller=delete_user_by_id&<?= "id=" . $user['id'] ?>">
+                            <button>
+                                <i data-lucide="trash-2 "></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
          
   
         </tbody>

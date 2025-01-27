@@ -1,6 +1,9 @@
 <?php
 
 require_once __DIR__ . "/../infra/models/ReservationModel.php";
+require_once __DIR__ . "/../middlewares/AdminMiddleware.php";
+
+AdminMiddleware();
 
 class DeleteReservationController {
     private $reservationModel;
@@ -11,5 +14,7 @@ class DeleteReservationController {
 
     public function handle() {
         $this->reservationModel->deleteById($_GET["id"]);
+
+        header("Location: ../admin/reservations.php");
     }
 }

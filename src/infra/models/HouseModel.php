@@ -71,6 +71,32 @@ class HouseModel {
         return $query->fetchAll();
     }
 
+    public function deleteById(string $id) {
+        $query = $this->db->query("UPDATE houses SET is_deleted = 1 WHERE id = :id");
+        $query->bindParam(":id", $id);
+    
+        return $query->execute();
+    }
+
+    public function updateById(string $id, string $name, string $description, string $address, string $city, string $state, int $price, int $rooms, int $capacity, string $images_url) {
+        $query = $this->db->query(
+            "UPDATE houses SET name = :name, description = :description, address = :address, city = :city, state = :state, price = :price, rooms = :rooms, capacity = :capacity, images_url = :images_url WHERE id = :id"
+        );
+
+        $query->bindParam(":id", $id);
+        $query->bindParam(":name", $name);
+        $query->bindParam(":description", $description);
+        $query->bindParam(":address", $address);
+        $query->bindParam(":city", $city);
+        $query->bindParam(":state", $state);
+        $query->bindParam(":price", $price);
+        $query->bindParam(":rooms", $rooms);
+        $query->bindParam(":capacity", $capacity);
+        $query->bindParam(":images_url", $images_url);
+
+        return $query->execute();
+    }
+
     public function count() {
         $query = $this->db->query("SELECT COUNT(*) as total FROM houses WHERE is_deleted = 0");
 
