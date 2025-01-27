@@ -3,28 +3,29 @@
 require_once __DIR__ . "/../../infra/models/UserModel.php";
 require_once __DIR__ . "/../../middlewares/notLoggedMiddleware.php";
 
-notLoggedMiddleware();
 
 class CreateAccountController {
     private $userModel;
-
+    
     public function __construct() {
         $this->userModel = new UserModel();
     }
 
     public function handle() {
+        notLoggedMiddleware();
+        
         if(
             !isset($_POST["name"]) ||
             !isset($_POST["email"]) ||
             !isset($_POST["password"])
         ) {
-            return header("Location: ./?error=missing_fields");
+            return header("Location: ../views/auth/signup.php?error=missing_fields");
         }
 
         if(
             $this->userModel->findByEmail($_POST["email"])
         ) {
-            return header("Location: ./?error=email_already_exists");
+            return header("Location: ../views/auth/signup.php?error=email_already_exists");
         }
 
         $password_hash = password_hash($_POST["password"], PASSWORD_BCRYPT);
@@ -40,7 +41,7 @@ class CreateAccountController {
         );
 
         if(!$res) {
-            return header("Location: ./?error=internal_error");
+            return header("Location: ../views/auth/signup.php?error=internal_error");
         }
 
         $_SESSION["user_id"] = $user_id;

@@ -46,7 +46,7 @@
         </div>
 
         <button class="button w-full" type="submit">Criar conta</button>
-        <a href="/signin" class="!text-black">Já tem uma conta? <u> Faça login </u></a>
+        <a href="./signin.php" class="!text-black">Já tem uma conta? <u> Faça login </u></a>
     </form>
 </body>
 </html>

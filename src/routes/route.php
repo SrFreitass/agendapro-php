@@ -1,6 +1,8 @@
 <?php
 
 require_once __DIR__ . "/../controllers/auth/createAccountController.php";
+require_once __DIR__ . "/../controllers/auth/SignInController.php";
+require_once __DIR__ . "/../controllers/CreatePlaceController.php";
 
 $routes = [
     "signup" => [
@@ -9,7 +11,21 @@ $routes = [
             $controller = new CreateAccountController();
             $controller->handle();
         },
-    ]
+    ],
+    "signin" => [
+        "method" => "POST",
+        "controller" => function () {
+            $controller = new SignInController();
+            $controller->handle();
+        },
+    ],
+    "create_place" => [
+        "method" => "POST",
+        "controller" => function () {
+            $controller = new CreatePlaceController();
+            $controller->handle();
+        },
+    ],
 ];
 
 

@@ -1,7 +1,6 @@
 <?php
     require_once __DIR__ . "/../../middlewares/LoggedMiddleware.php";
 
-    loggedMiddleware();
 ?>
 
 <!DOCTYPE html>

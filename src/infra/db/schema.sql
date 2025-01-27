@@ -7,3 +7,16 @@ CREATE TABLE IF NOT EXISTS users (
   role ENUM('admin', 'user') DEFAULT 'user',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS houses (
+  id VARCHAR(13) PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description TEXT NOT NULL,
+  address VARCHAR(255) NOT NULL,
+  city VARCHAR(255) NOT NULL,
+  state VARCHAR(255) NOT NULL,
+  price DECIMAL(10, 2) NOT NULL,
+  rooms INT NOT NULL,
+  capacity INT NOT NULL,
+  images_url TEXT NOT NULL
+);
