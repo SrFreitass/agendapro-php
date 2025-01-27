@@ -20,3 +20,16 @@ CREATE TABLE IF NOT EXISTS houses (
   capacity INT NOT NULL,
   images_url TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS reservations (
+  id VARCHAR(13) PRIMARY KEY,
+  house_id VARCHAR(13) NOT NULL,
+  user_id VARCHAR(13) NOT NULL,
+  check_in DATE NOT NULL,
+  check_out DATE NOT NULL,
+  message TEXT NOT NULL,
+  total_price DECIMAL(10, 2) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (house_id) REFERENCES houses(id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+)

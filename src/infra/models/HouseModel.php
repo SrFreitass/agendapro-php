@@ -28,4 +28,12 @@ class HouseModel {
 
         return $query->execute();
     }
+
+    public function findById(string $id) {
+        $query = $this->db->query("SELECT * FROM houses WHERE id = :id");
+        $query->bindParam(":id", $id);
+        $query->execute();
+    
+        return $query->fetch();
+    }
 }
