@@ -8,6 +8,7 @@ require_once __DIR__ . "/../controllers/GetHousesWithFilterController.php";
 require_once __DIR__ . "/../controllers/DeleteReservationController.php";
 require_once __DIR__ . "/../controllers/DeleteHouseController.php";
 require_once __DIR__ . "/../controllers/DeleteUserController.php";
+require_once __DIR__ . "/../controllers/DeleteReservationByUserController.php";
 require_once __DIR__ . "/../controllers/UpdateHouseController.php";
 
 $routes = [
@@ -52,6 +53,14 @@ $routes = [
         "method" => "GET",
         "controller" => function () {
             $controller = new DeleteReservationController();
+            $controller->handle();
+        },
+    ],
+
+    "delete_reservation_by_user" => [
+        "method" => "GET",
+        "controller" => function () {
+            $controller = new DeleteReservationByUserController();
             $controller->handle();
         },
     ],

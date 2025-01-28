@@ -10,35 +10,21 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
-    >
+    <link rel="stylesheet" href="../../../public/style/global.css">
+    <script src="../../../public/scripts/global.js" defer></script>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        * {
-            font-family: 'Poppins', sans-serif !important;
+    <title>Dashboard - AgendaPRO</title>
+    <script>
+        if(window.innerWidth < 1140) {
+            alert('Tela muito pequena para visualizar o dashboard. Redirecionando para a página de início.');
+            location.href = '/src/views/home';
         }
-
-   
-
-        body {
-            background-color: #f9fafb;
-        }
-
-        a {
-            color: var(--bulma-body-color);
-        }
-    </style>
+    </script>
     <title></title>
 </head>
 <body class="min-h-screen flex">
@@ -81,7 +67,7 @@
             </li>
         </ul>
     </aside>
-    <div class="p-10 w-[80rem]">
+    <div class="p-10 w-full">
         <h1 class="!text-3xl !font-semibold !mb-8">Dashboard</h1>
 
         <div class="grid grid-cols-3 !gap-12">
@@ -204,8 +190,5 @@
     </script>
         
     </div>
-    <script>
-        lucide.createIcons();
-    </script>
 </body>
 </html>

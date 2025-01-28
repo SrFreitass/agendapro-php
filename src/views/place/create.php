@@ -55,31 +55,42 @@ if(isset($house['state'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
-    >
+    <link rel="stylesheet" href="../../../public/style/global.css">
+    <script src="../../../public/scripts/global.js" defer></script>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <style>
-        * {
-            font-family: 'Poppins', sans-serif !important;
-        }
-        body {
-            background-color: #f9fafb;
-        }
-    </style>
-    <title>Document</title>
+    <title><?= isset($_GET["edit"]) ? "Editar" : "Criar" ?> casa - AgendaPRO</title>
 </head>
-<body class="!py-10">
-    <form <?= isset($_GET["edit"]) ? "" : "enctype='multipart/form-data'" ?> class="flex flex-col gap-4 max-w-[50rem] m-auto p-4 bg-white drop-shadow-lg rounded-xl p-5" action="../../routes/route.php?controller=<?= isset($_GET['edit']) ? 'update_house_by_id&id=' . $house_id : 'create_place' ?>" method="POST">
+<body>
+<header class="w-full !flex items-center gap-4 p-5 !py-7 bg-white drop-shadow-lg sticky top-0 z-10">
+        <div class="flex items-center gap-2 max-sm:m-auto"> 
+            <i data-lucide="house" class="text-blue-500">
+            </i>
+            <h2 class="!text-2xl !font-semibold">AgendaPRO</h2>
+        </div>
+        <nav class="max-sm:hidden">
+            <ul class="flex gap-6">
+                <li>
+                    <a href="/src/views/home">
+                        Explorar casas
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/src/views/reservations">
+                        Minhas reservas
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <form <?= isset($_GET["edit"]) ? "" : "enctype='multipart/form-data'" ?> class="!mt-10 flex flex-col gap-4 max-w-[50rem] m-auto p-4 bg-white drop-shadow-lg rounded-xl p-5 max-md:w-[90%]" action="../../routes/route.php?controller=<?= isset($_GET['edit']) ? 'update_house_by_id&id=' . $house_id : 'create_place' ?>" method="POST">
         <h2 class="!text-3xl !font-semibold">
             <?= isset($_GET["edit"]) ? "Editar espaço" : "Criar novo espaço" ?>
         </h2>
@@ -202,8 +213,5 @@ if(isset($house['state'])) {
             <?= isset($_GET["edit"]) ? "Editar espaço" : "Criar espaço" ?>
         </button>
     </form>
-    <script>
-        lucide.createIcons();
-    </script>
 </body>
 </html>

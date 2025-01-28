@@ -19,42 +19,24 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
-    >
+    <link rel="stylesheet" href="../../../public/style/global.css">
+    <script src="../../../public/scripts/global.js" defer></script>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <style>
-        * {
-            font-family: 'Poppins', sans-serif !important;
-        }
-        body {
-            background-color: #f9fafb;
-        }
-
-        a {
-            text-decoration: none;
-            color: var(--bulma-body-color);
-        }
-    </style>
-    <title>Document</title>
+    <title>Início - AgendaPRO</title>
 </head>
 <body class="min-h-screen">
     <header class="w-full !flex items-center gap-4 p-5 !py-7 bg-white drop-shadow-lg sticky top-0 z-10">
-        <div class="flex items-center gap-2"> 
+        <div class="flex items-center gap-2 max-sm:m-auto"> 
             <i data-lucide="house" class="text-blue-500">
             </i>
             <h2 class="!text-2xl !font-semibold">AgendaPRO</h2>
         </div>
-        <nav>
+        <nav class="max-sm:hidden">
             <ul class="flex gap-6">
                 <li>
                     <a href="/src/views/home">

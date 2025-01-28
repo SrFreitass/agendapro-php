@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS houses (
   rooms INT NOT NULL,
   capacity INT NOT NULL,
   images_url TEXT NOT NULL,
-  is_deleted BOOLEAN DEFAULT FALSE,
+  is_deleted BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE IF NOT EXISTS reservations (

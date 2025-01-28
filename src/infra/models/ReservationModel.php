@@ -42,6 +42,22 @@ class ReservationModel {
         return $query->fetchAll();
     }
 
+    public function findByUserId(string $id) {
+        $query = $this->db->query("SELECT reservations.id as id, users.name as user_name, houses.name as house_name, check_in, check_out, reservations.created_at FROM reservations INNER JOIN houses ON reservations.house_id = houses.id INNER JOIN users ON reservations.user_id = users.id WHERE reservations.is_deleted = 0 AND houses.is_deleted = 0 AND users.is_deleted = 0 AND users.id = :id");
+        $query->bindParam(":id", $id);
+        $query->execute();
+    
+        return $query->fetchAll();
+    }
+
+    public function findById(string $id) {
+        $query = $this->db->query("SELECT * FROM reservations WHERE id = :id AND is_deleted = 0");
+        $query->bindParam(":id", $id);
+        $query->execute();
+    
+        return $query->fetch();
+    }
+
     public function deleteById(string $id) {
         $query = $this->db->query("UPDATE reservations SET is_deleted = 1 WHERE id = :id");
         $query->bindParam(":id", $id);

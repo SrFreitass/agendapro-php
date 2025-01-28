@@ -2,11 +2,11 @@
 
 require_once __DIR__ . "/../infra/models/ReservationModel.php";
 require_once __DIR__ . "/../infra/models/HouseModel.php";
-require_once __DIR__ . "/../middlewares/AdminMiddleware.php";
+require_once __DIR__ . "/../middlewares/LoggedMiddleware.php";
 
-AdminMiddleware();
+loggedMiddleware();
 
-class GetReservationsController {
+class GetReservationsByUserIdController {
     private $reservationModel; 
 
     public function __construct() {
@@ -14,6 +14,6 @@ class GetReservationsController {
     }
 
     public function handle() {
-      return $this->reservationModel->findAll();
+      return $this->reservationModel->findByUserId($_SESSION["user_id"]);
     }
 }
