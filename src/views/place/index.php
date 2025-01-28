@@ -44,8 +44,8 @@
     <title>Document</title>
 </head>
 <body class="!py-20">
-    <main class="h-[50rem] w-[75rem] bg-white m-auto drop-shadow-lg rounded-xl flex gap-16">
-        <div class="w-1/2 h-full">
+    <main class="h-[50rem] w-[75rem] bg-white m-auto drop-shadow-lg rounded-xl flex gap-16 max-xl:w-[70%] max-xl:h-[35rem] max-lg:w-[90%]">
+        <div class="w-1/2 h-full max-xl:hidden">
             <img src="<?= "http://localhost:3000/public" . $mainImage ?>" alt="Main image" class="w-full min-h-full object-cover rounded-l-xl">
             <div class="absolute bg-gradient-to-t from-black/60 to-transparent z-10 h-full"></div>
             <h2 class="relative bottom-20 left-4 text-white !text-3xl !font-semibold">
@@ -60,7 +60,7 @@
             </h3>
         </div>
 
-        <div class="mt-16 w-1/2 pr-16">
+        <div class="mt-16 w-1/2 pr-16 max-xl:m-auto max-xl:w-full max-xl:px-8">
             <h2 class="!text-3xl !font-semibold">Faça sua reserva</h2>
             <form class="mt-4" action="../routes/route.php?controller=create_reservation" method="POST">
                 <input type="hidden" name="house_id" value="<?= $house["id"] ?>">

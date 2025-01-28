@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS reservations (
   message TEXT NOT NULL,
   total_price DECIMAL(10, 2) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  is_deleted BOOLEAN DEFAULT FALSE,
   FOREIGN KEY (house_id) REFERENCES houses(id),
   FOREIGN KEY (user_id) REFERENCES users(id)
 )

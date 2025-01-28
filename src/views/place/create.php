@@ -79,7 +79,7 @@ if(isset($house['state'])) {
     <title>Document</title>
 </head>
 <body class="!py-10">
-    <form enctype="multipart/form-data" class="flex flex-col gap-4 max-w-[50rem] m-auto p-4 bg-white drop-shadow-lg rounded-xl p-5" action="../../routes/route.php?controller=<?= isset($_GET['edit']) ? 'update_house_by_id&id=' . $house_id : 'create_place' ?>" method="POST">
+    <form <?= isset($_GET["edit"]) ? "" : "enctype='multipart/form-data'" ?> class="flex flex-col gap-4 max-w-[50rem] m-auto p-4 bg-white drop-shadow-lg rounded-xl p-5" action="../../routes/route.php?controller=<?= isset($_GET['edit']) ? 'update_house_by_id&id=' . $house_id : 'create_place' ?>" method="POST">
         <h2 class="!text-3xl !font-semibold">
             <?= isset($_GET["edit"]) ? "Editar espaço" : "Criar novo espaço" ?>
         </h2>
@@ -107,9 +107,9 @@ if(isset($house['state'])) {
             Localização
         </h3>
 
-        <div class="flex items-center gap-6">
+        <div class="flex items-center gap-6 max-sm:flex-col">
 
-            <div class="flex flex-col flex-grow-1">
+            <div class="flex flex-col flex-grow-1 max-sm:w-full">
                 <label class="mb-2">Endereço</label>
                 <p class="control has-icons-left has-icons-right">
                     <input class="input" type="text" name="address"  required value="<?= isset($house['address']) ? $house['address']  : '' ?>" />
@@ -119,15 +119,15 @@ if(isset($house['state'])) {
                 </p>
             </div>
 
-            <div class="flex flex-col ">
+            <div class="flex flex-col max-sm:w-full">
                 <label class="mb-2">Cidade</label>
                 <input class="input" type="text" name="city" required value="<?= isset($house['city']) ? $house['city']  : '' ?>"/>
             </div>
 
-            <div class="flex flex-col">
+            <div class="flex flex-col max-sm:w-full">
                 <label class="mb-2">Estado</label>
-                <div class="select">
-                    <select name="state" required>
+                <div class="select max-sm:w-full">
+                    <select class="max-sm:w-full" name="state" required>
                         <?php
                             isset($_GET["edit"]) ?
                             ""
@@ -148,9 +148,9 @@ if(isset($house['state'])) {
             Detalhes do espaço
         </h3>
 
-        <div class="flex items-center gap-6">
+        <div class="flex items-center gap-6 max-sm:flex-col">
 
-            <div class="flex flex-grow-1 flex-col gap-2 w-[54%]">
+            <div class="flex flex-grow-1 flex-col gap-2 w-[54%] max-sm:w-full">
                 <label for="">
                     Preço por noite
                 </label>
@@ -162,7 +162,7 @@ if(isset($house['state'])) {
                 </p>
             </div>
 
-            <div class="flex flex-grow-1 flex-col gap-2">
+            <div class="flex flex-grow-1 flex-col gap-2 max-sm:w-full">
                 <label for="">Número de quartos</label>
                 <p class="control has-icons-left has-icons-right">
                     <input class="input pr-2" type="number" name="rooms" required value="<?= isset($house['rooms']) ? $house['rooms'] : '' ?>"/>
@@ -172,7 +172,7 @@ if(isset($house['state'])) {
                 </p>
             </div>
 
-            <div class="flex flex-grow-1 flex-col gap-2">
+            <div class="flex flex-grow-1 flex-col gap-2 max-sm:w-full">
                 <label for="">Capacidade máxima</label>
                 <p class="control has-icons-left has-icons-right">
                     <input class="input pr-2" type="number" name="capacity" required value="<?= isset($house['capacity']) ? $house['capacity'] : '' ?>"/>
@@ -195,7 +195,7 @@ if(isset($house['state'])) {
             <small>
                 PNG, JPG, GIF, SVG até 10MB
             </small>
-            <input type="file" name="images" onchange="alert('Image upada com sucesso!')" class="absolute w-full h-full text-white" required/>
+            <input type="file" name="images" onchange="alert('Image upada com sucesso!')" class="absolute w-full h-full text-white" <?= isset($_GET["edit"]) ? "" : "required" ?>/>
         </div>
 
         <button class="button !bg-blue-600 !text-white py-3 w-full">

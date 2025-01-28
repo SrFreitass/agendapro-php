@@ -36,7 +36,7 @@ class UpdateHouseController {
         }
 
         if(!isset($_FILES["images"])) {
-            return $this->houseModel->updateById(
+            $this->houseModel->updateById(
                 $house["id"],
                 $_POST["name"],
                 $_POST["description"],
@@ -48,6 +48,8 @@ class UpdateHouseController {
                 $_POST["capacity"],
                 $house["images_url"]
             );
+
+            return header("Location: ../views/place/create.php?success=true");
         }     
  
         if($_FILES["images"]["error"] != 0) {

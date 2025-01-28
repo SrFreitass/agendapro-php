@@ -48,12 +48,36 @@
     <title>Document</title>
 </head>
 <body class="min-h-screen">
-    <div class="max-w-[75rem] m-auto p-4">
-        <form class="flex items-center gap-4 p-5 bg-white drop-shadow-lg rounded-xl" method="get">
+    <header class="w-full !flex items-center gap-4 p-5 !py-7 bg-white drop-shadow-lg sticky top-0 z-10">
+        <div class="flex items-center gap-2"> 
+            <i data-lucide="house" class="text-blue-500">
+            </i>
+            <h2 class="!text-2xl !font-semibold">AgendaPRO</h2>
+        </div>
+        <nav>
+            <ul class="flex gap-6">
+                <li>
+                    <a href="/src/views/home">
+                        Explorar casas
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/src/views/reservations">
+                        Minhas reservas
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <div class="max-w-[80rem] m-auto p-4">
+        <form class="flex items-center gap-4 p-5 bg-white drop-shadow-lg rounded-xl max-sm:flex-col" method="get">
             <input type="text" class="input !max-w-[30rem]" name="name" placeholder="Pesquisar pelo nomes">
             
-            <div class="select">
-                <select name="price" onchange="this.form.submit()">
+            <div class="select max-sm:w-full">
+                <select class="!w-full" name="price" onchange="this.form.submit()">
                     <option value="">
                         Todos os preços
                     </option>  
@@ -75,8 +99,8 @@
                 </select>
             </div>
 
-            <div class="select">
-                <select name="capacity" onchange="this.form.submit()">
+            <div class="select max-sm:w-full">
+                <select class="!w-full" name="capacity" onchange="this.form.submit()">
                     <option value="">
                         Todos os tamanhos
                     </option>
@@ -89,51 +113,42 @@
             </div>
         </form>
 
-        <div class="flex flex-wrap justify-center gap-4 p-4">
+        <div class="mt-6 flex flex-wrap justify-center gap-4">
 
+            <?php foreach($houses as $house): ?>
+                <a href="./place?id=<?=$house['id']?>" class='relative'>
+                    <div class='bg-white w-[25rem] h-[23rem] drop-shadow-lg rounded-xl pb-5 m-auto'>
+                        <img src='http://localhost:3000/public<?=$house["images_url"]?>' alt='Main image' class='w-full min-h-[14rem] max-h-[14rem] object-cover rounded-t-xl'>
+                        <div class='p-4 flex flex-col gap-4'>
+                            <h2 class='!text-lg !font-semibold'><?=$house['name']?></h2>
+                            <h3 class='!text-sm flex items-center gap-2'>
+                                <i data-lucide='map-pin'></i>
+                                <?= $house['city'] ?>, <?= $house['state'] ?>
+                            </h3>
 
-            <?php
+                            <div class='flex justify-between'>
+                                <h3 class='!text-sm flex items-center gap-2'>
+                                    <i data-lucide='bed-double'></i>
+                                    <?=$house['rooms'] ?> quartos
+                                </h3>
 
-                foreach($houses as $house) {
-                    $image_url = explode(",", $house["images_url"])[0];
-                    $id = $house["id"];
-                        
-                    echo /*html*/"
-                        <a href='./place?id=$id' class='relative'>
-                            <div class='bg-white w-[25rem] h-[23rem] drop-shadow-lg rounded-xl pb-5 m-auto'>
-                                <img src='http://localhost:3000/public$image_url' alt='Main image' class='w-full min-h-[14rem] max-h-[14rem] object-cover rounded-t-xl'>
-                                <div class='p-4 flex flex-col gap-4'>
-                                    <h2 class='!text-lg !font-semibold'>{$house['name']}</h2>
-                                    <h3 class='!text-sm flex items-center gap-2'>
-                                        <i data-lucide='map-pin'></i>
-                                        {$house['city']}, {$house['state']}
-                                    </h3>
-
-                                    <div class='flex justify-between'>
-                                        <h3 class='!text-sm flex items-center gap-2'>
-                                            <i data-lucide='bed-double'></i>
-                                            {$house['rooms']} quartos
-                                        </h3>
-
-                                        <h3 class='!text-sm flex items-center gap-2'>
-                                            <i data-lucide='users'></i>
-                                            Até {$house['capacity']} hóspedes
-                                        </h3>
-                                    </div>
-                                </div>
-
-                                <div class='absolute top-4 right-2 bg-white p-2 px-4 rounded-full'>
-                                    <h3 class='!text-sm !font-semibold'>
-                                        R$ {$house['price']} / noite
-                                    </h3>
-                                </div>
+                                <h3 class='!text-sm flex items-center gap-2'>
+                                    <i data-lucide='users'></i>
+                                    Até <?=$house['capacity']?> hóspedes
+                                </h3>
                             </div>
-                        <a/>
-                    ";
-                }
-                
-            ?>
+                        </div>
 
+                        <div class='absolute top-4 right-2 bg-white p-2 px-4 rounded-full'>
+                            <h3 class='!text-sm !font-semibold'>
+                                R$ <?=$house['price']?> / noite
+                            </h3>
+                        </div>
+                    </div>
+                </a>
+
+
+            <?php endforeach; ?>
         </div>
     </div>            
     <script>

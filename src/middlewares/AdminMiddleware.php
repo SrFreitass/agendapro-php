@@ -20,7 +20,7 @@ function AdminMiddleware() {
     }
 
     if($user["role"] !== "admin") {
-        return header("Location: ../../views/home");
+        return header("Location: ../views/home");
     }
 }   
 
