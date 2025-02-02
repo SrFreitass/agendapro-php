@@ -16,6 +16,10 @@
     //     header("Location: ../views/404.php");
     // }
 
+    if(isset($_GET["error"]) && $_GET["error"] === "house_not_available") {
+        echo "<script>alert('Casa não disponível para as datas selecionadas')</script>";
+    }
+
     $mainImage = explode(",", $house["images_url"])[0];
 ?>
 
