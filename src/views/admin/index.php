@@ -7,6 +7,7 @@
     $metrics = (new GetMetricsController())->handle();
 
     $months = $metrics['reservations_months'];
+                
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +19,8 @@
     <script src="../../../public/scripts/global.js" defer></script>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <title>Dashboard - AgendaPRO</title>
     <script>
         if(window.innerWidth < 1140) {
@@ -67,10 +70,10 @@
             </li>
         </ul>
     </aside>
-    <div class="p-10 w-full">
+    <div class="p-10 w-full  max-w-[1300px]">
         <h1 class="!text-3xl !font-semibold !mb-8">Dashboard</h1>
 
-        <div class="grid grid-cols-3 !gap-12">
+        <div class="grid grid-cols-3 !gap-16">
             <div>
                 <div class="max-w-64 bg-white drop-shadow-lg rounded-xl p-5 flex justify-between gap-4">
                     <div>
