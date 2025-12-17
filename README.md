@@ -40,10 +40,10 @@ Para rodar o projeto localmente, você precisará ter o [XAMPP](https://www.apac
 
 1. Inicie o **Apache** e o **MySQL** no painel de controle do XAMPP.
 2. Acesse `http://localhost/phpmyadmin` no seu navegador.
-3. Crie um novo banco de dados com o nome: `agendapro` (ou o nome que estiver no seu arquivo de conexão).
+3. Crie um novo banco de dados com o nome: `agendapro_db` (ou o nome que estiver no seu arquivo de conexão).
 4. Importe o arquivo SQL:
    - Clique na aba **Importar**.
-   - Selecione o arquivo `.sql` que está na pasta `database` ou na raiz deste projeto.
+   - Selecione o arquivo `schema.sql` que está na pasta `infra/db` deste projeto.
    - Execute a importação.
 
 ### 3. Rodando a Aplicação
